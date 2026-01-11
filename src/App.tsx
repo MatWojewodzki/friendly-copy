@@ -1,10 +1,13 @@
 import './main.css'
+import Sidebar from './components/sidebar/Sidebar.tsx'
+import MainArea from './components/MainArea.tsx'
 
 function App() {
     return (
-        <main className="flex justify-center items-center h-screen">
-            <p className="font-bold text-2xl">Hello World!</p>
-        </main>
+        <div className="flex h-screen bg-neutral-200">
+            <Sidebar />
+            <MainArea />
+        </div>
     )
 }
 
