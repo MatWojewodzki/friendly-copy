@@ -1,7 +1,28 @@
-# Tauri + React + Typescript
+# friendly-copy
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+# TODO list before MVP
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- React:
+    - define color scheme in tailwind
+    - layout:
+        - sidebar dragging
+        - sidebar collapsing
+    - icons from Google Fonts
+    - mainAreaContent context
+    - sidebar items:
+        - create-action button
+        - action list item
+    - main area:
+        - action form
+        - action display:
+            - title
+            - src/dest inputs
+            - create button
+    - database:
+        - creation (migration), schema
+        - insert function
+        - list function
+        - action details function
+- Rust:
+    - backend detection
+    - command builder and backend runner
