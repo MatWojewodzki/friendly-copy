@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import IconComponent from '../../assets/add.svg?react'
 
-function CopyActionCreationButton() {
+function NewCopyActionButton() {
     return (
         <button
             className={classNames(
@@ -10,9 +10,9 @@ function CopyActionCreationButton() {
             )}
         >
             <IconComponent className="size-6 shrink-0" />
-            <p className="truncate">Create new Copy Action</p>
+            <p className="truncate">New Copy Action</p>
         </button>
     )
 }
 
-export default CopyActionCreationButton
+export default NewCopyActionButton

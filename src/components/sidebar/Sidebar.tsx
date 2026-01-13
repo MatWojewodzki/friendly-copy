@@ -1,7 +1,7 @@
 import Resizer from './Resizer.tsx'
 import classNames from 'classnames'
 import { useState } from 'react'
-import CopyActionCreationButton from './CopyActionCreationButton.tsx'
+import NewCopyActionButton from './NewCopyActionButton.tsx'
 
 function Sidebar() {
     const [width, setWidth] = useState(240)
@@ -14,7 +14,7 @@ function Sidebar() {
                 'rounded-r-lg shadow-lg'
             )}
         >
-            <CopyActionCreationButton />
+            <NewCopyActionButton />
             <Resizer setSidebarWidth={setWidth} />
         </nav>
     )
