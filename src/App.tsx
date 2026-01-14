@@ -1,6 +1,6 @@
 import './main.css'
 import Sidebar from './components/sidebar/Sidebar.tsx'
-import MainArea from './components/MainArea.tsx'
+import MainArea from './components/mainArea/MainArea.tsx'
 
 function App() {
     return (
