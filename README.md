@@ -5,19 +5,14 @@
 - React:
     - define color scheme in tailwind
     - layout:
-        - sidebar dragging
         - sidebar collapsing
-    - icons from Google Fonts
     - mainAreaContent context
     - sidebar items:
-        - create-action button
         - action list item
     - main area:
-        - action form
-        - action display:
-            - title
-            - src/dest inputs
-            - create button
+        - action display
+        - action form:
+            - `DirPathInput` validation, error messages, error styling
     - database:
         - creation (migration), schema
         - insert function
