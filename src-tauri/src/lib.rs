@@ -1,15 +1,49 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+use std::path::{Path, PathBuf};
+use tauri_plugin_sql::{Builder, Migration, MigrationKind};
+
+fn normalize_path(path: &Path) -> PathBuf {
+    path.components().collect()
+}
+
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+fn validate_path(path: String) -> String {
+    if path.is_empty() {
+        return "Path cannot be empty".into();
+    }
+
+    let path = Path::new(&path);
+    if !path.is_absolute() {
+        return "Path must be absolute".into();
+    }
+    String::new()
+}
+
+#[tauri::command]
+fn are_paths_different(path1: String, path2: String) -> bool {
+    let path1 = Path::new(&path1);
+    let path2 = Path::new(&path2);
+
+    normalize_path(path1) != normalize_path(path2)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let migrations = vec![Migration {
+        version: 1,
+        description: "create_copy_action_table",
+        sql: include_str!("../migrations/0001_create_copy_action_table.sql"),
+        kind: MigrationKind::Up,
+    }];
+
     tauri::Builder::default()
+        .plugin(
+            Builder::default()
+                .add_migrations("sqlite:database.sqlite", migrations)
+                .build(),
+        )
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![validate_path, are_paths_different])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

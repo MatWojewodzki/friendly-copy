@@ -1,9 +1,19 @@
 import CopyActionCreationForm from './CopyActionCreationForm/CopyActionCreationForm.tsx'
+import { SelectedPage } from '../../App.tsx'
+import CopyActionView from './CopyActionView.tsx'
 
-function MainArea() {
+type MainAreaProps = {
+    selectedPage: SelectedPage
+}
+
+function MainArea(props: MainAreaProps) {
     return (
         <main className="flex-1 p-8">
-            <CopyActionCreationForm />
+            {props.selectedPage === 'new' ? (
+                <CopyActionCreationForm />
+            ) : (
+                <CopyActionView id={props.selectedPage} />
+            )}
         </main>
     )
 }

@@ -1,9 +1,16 @@
 import Resizer from './Resizer.tsx'
 import classNames from 'classnames'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import NewCopyActionButton from './NewCopyActionButton.tsx'
+import CopyActionList from './CopyActionList.tsx'
+import { SelectedPage } from '../../App.tsx'
 
-function Sidebar() {
+type SidebarProps = {
+    selectedPage: SelectedPage
+    setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
+}
+
+function Sidebar(props: SidebarProps) {
     const [width, setWidth] = useState(240)
 
     return (
@@ -14,7 +21,11 @@ function Sidebar() {
                 'rounded-r-lg shadow-lg'
             )}
         >
-            <NewCopyActionButton />
+            <NewCopyActionButton setSelectedPage={props.setSelectedPage} />
+            <CopyActionList
+                selectedPage={props.selectedPage}
+                setSelectedPage={props.setSelectedPage}
+            />
             <Resizer setSidebarWidth={setWidth} />
         </nav>
     )
