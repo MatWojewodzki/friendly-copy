@@ -1,20 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react'
 import {
-    deleteCopyAction,
     insertCopyAction,
     listCopyActions,
 } from '../repositories/copyActionRepository'
-import {
-    UserInputCopyAction,
-    copyActionSchema,
-    CopyAction,
-} from '../schemas/copyActionSchemas.ts'
+import { CopyAction } from '../schemas/copyActionSchemas.ts'
 
 export type CopyActionContextValue = {
     getCopyActions: () => CopyAction[]
-    addCopyAction: (copyAction: UserInputCopyAction) => Promise<number>
-    removeCopyAction: (id: number) => Promise<void>
-    getCopyAction: (id: number) => CopyAction | undefined
+    addCopyAction: (copyAction: CopyAction) => Promise<void>
+    getCopyAction: (id: string) => CopyAction | undefined
 }
 
 export const CopyActionContext = createContext<CopyActionContextValue | null>(
@@ -32,25 +26,13 @@ export function CopyActionProvider({
         return copyActions
     }
 
-    const getCopyAction = (id: number): CopyAction | undefined => {
+    const getCopyAction = (id: string): CopyAction | undefined => {
         return copyActions.find((copyAction) => copyAction.id === id)
     }
 
-    const addCopyAction = async (
-        userInputCopyAction: UserInputCopyAction
-    ): Promise<number> => {
-        const id = await insertCopyAction(userInputCopyAction)
-        const copyAction = await copyActionSchema.parseAsync({
-            id,
-            ...userInputCopyAction,
-        })
+    const addCopyAction = async (copyAction: CopyAction): Promise<void> => {
+        await insertCopyAction(copyAction)
         setCopyActions([...copyActions, copyAction])
-        return id
-    }
-
-    const removeCopyAction = async (id: number) => {
-        await deleteCopyAction(id)
-        setCopyActions(copyActions.filter((copyAction) => copyAction.id !== id))
     }
 
     useEffect(() => {
@@ -66,7 +48,6 @@ export function CopyActionProvider({
                 getCopyActions,
                 getCopyAction,
                 addCopyAction,
-                removeCopyAction,
             }}
         >
             {children}

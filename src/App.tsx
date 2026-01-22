@@ -4,7 +4,7 @@ import MainArea from './components/mainArea/MainArea.tsx'
 import { CopyActionProvider } from './contexts/copyActionContext.tsx'
 import { useState } from 'react'
 
-export type SelectedPage = 'new' | number
+export type SelectedPage = string
 
 function App() {
     const [selectedPage, setSelectedPage] = useState<SelectedPage>('new')

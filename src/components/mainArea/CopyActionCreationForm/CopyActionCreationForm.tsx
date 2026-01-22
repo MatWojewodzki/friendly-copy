@@ -86,8 +86,7 @@ function CopyActionCreationForm() {
             srcDirPath,
             dstDirPath,
         })
-        const id = await addCopyAction(copyAction)
-        console.log(id)
+        await addCopyAction(copyAction)
     }
 
     return (

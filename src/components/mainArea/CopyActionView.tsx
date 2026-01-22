@@ -1,7 +1,7 @@
 import useCopyAction from '../../hooks/useCopyAction.ts'
 
 type CopyActionViewProps = {
-    id: number
+    id: string
 }
 
 function CopyActionView(props: CopyActionViewProps) {

@@ -8,7 +8,7 @@ export const pathSchema = z.string().superRefine(async (path, ctx) => {
     }
 })
 
-export const userInputCopyActionSchema = z
+const copyActionBaseSchema = z
     .object({
         title: z.string().min(1, 'Title can not be empty'),
         srcDirPath: pathSchema,
@@ -25,10 +25,10 @@ export const userInputCopyActionSchema = z
         }
     })
 
-export type UserInputCopyAction = z.infer<typeof userInputCopyActionSchema>
-
-export const copyActionSchema = userInputCopyActionSchema.extend({
-    id: z.number(),
-})
+export const copyActionSchema = copyActionBaseSchema.extend({ id: z.uuidv4() })
 
 export type CopyAction = z.infer<typeof copyActionSchema>
+
+export const userInputCopyActionSchema = copyActionBaseSchema.extend({
+    id: z.uuidv4().default(() => crypto.randomUUID()),
+})
