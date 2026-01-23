@@ -13,16 +13,19 @@ function CopyActionListItem(props: CopyActionListItemProps) {
     const { copyAction } = props
 
     return (
-        <li
-            className={classNames(
-                'ps-2 py-4 cursor-pointer shadow-sm truncate',
-                'hover:bg-neutral-300 focus:outline-none focus:ring ring-black',
-                { 'bg-neutral-300': props.selectedPage === copyAction.id }
-            )}
-            key={copyAction.id}
-            onClick={() => props.setSelectedPage(copyAction.id)}
-        >
-            {copyAction.title}
+        <li className="flex flex-col">
+            <button
+                type="button"
+                className={classNames(
+                    'ps-4 py-4 cursor-pointer text-start truncate',
+                    'hover:bg-neutral-300 focus:outline-none focus:bg-neutral-300',
+                    { 'bg-neutral-200': props.selectedPage === copyAction.id }
+                )}
+                key={copyAction.id}
+                onClick={() => props.setSelectedPage(copyAction.id)}
+            >
+                {copyAction.title}
+            </button>
         </li>
     )
 }

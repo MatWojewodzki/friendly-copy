@@ -4,6 +4,7 @@ import React from 'react'
 import { SelectedPage } from '../../App.tsx'
 
 type NewCopyActionButtonProps = {
+    selectedPage: SelectedPage
     setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
 }
 
@@ -12,7 +13,7 @@ function NewCopyActionButton(props: NewCopyActionButtonProps) {
         <button
             className={classNames(
                 'py-4 ps-2 flex items-center gap-2',
-                'shadow-sm cursor-pointer hover:bg-neutral-300 focus:outline-none focus:ring ring-black'
+                ' cursor-pointer hover:bg-neutral-300 focus:outline-none focus:bg-neutral-300'
             )}
             onClick={() => props.setSelectedPage('new')}
         >

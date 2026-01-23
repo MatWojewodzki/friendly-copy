@@ -10,7 +10,7 @@ function App() {
     const [selectedPage, setSelectedPage] = useState<SelectedPage>('new')
     return (
         <CopyActionProvider>
-            <div className="flex h-screen bg-neutral-200">
+            <div className="flex h-screen bg-neutral-100">
                 <Sidebar
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}

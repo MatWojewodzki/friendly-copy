@@ -16,7 +16,7 @@ function CopyActionList(props: CopyActionListProps) {
             <h2 className="px-2 mt-8 mb-2 font-semibold">Copy Actions</h2>
             <ul className="overflow-y-auto">
                 {copyActions.length === 0 && (
-                    <li className="text-center">No Copy Actions</li>
+                    <li className="text-sm text-center">No Copy Actions</li>
                 )}
                 {copyActions.map((copyAction) => (
                     <CopyActionListItem

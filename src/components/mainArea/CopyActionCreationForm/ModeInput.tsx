@@ -14,9 +14,12 @@ function ModeInput(props: CopyModeInputProps) {
     return (
         <fieldset className="flex flex-col mb-8">
             <legend className="text-sm font-semibold mb-1">Copy mode</legend>
-            <div className="flex flex-col gap-1 ps-2">
+            <div className="flex flex-col gap-1 ps-1">
                 {options.map((option) => (
-                    <label key={option.value}>
+                    <label
+                        key={option.value}
+                        className="text-sm flex items-center gap-1"
+                    >
                         <input
                             type="radio"
                             name="mode"
@@ -25,7 +28,7 @@ function ModeInput(props: CopyModeInputProps) {
                             onChange={(e) =>
                                 props.setValue(parseInt(e.target.value))
                             }
-                        />{' '}
+                        />
                         {option.label}
                     </label>
                 ))}

@@ -7,7 +7,7 @@ import {
     pathSchema,
 } from '../../../schemas/copyActionSchemas.ts'
 import useCopyAction from '../../../hooks/useCopyAction.ts'
-import CopyModeInput from './CopyModeInput.tsx'
+import ModeInput from './ModeInput.tsx'
 
 function CopyActionCreationForm() {
     const { addCopyAction } = useCopyAction()
@@ -153,7 +153,7 @@ function CopyActionCreationForm() {
                     validate={validatePath}
                     inputRef={dstDirRef}
                 />
-                <CopyModeInput value={mode} setValue={setMode} />
+                <ModeInput value={mode} setValue={setMode} />
                 <div className="flex justify-end">
                     <button
                         type="submit"
