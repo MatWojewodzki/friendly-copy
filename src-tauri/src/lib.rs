@@ -1,5 +1,12 @@
+mod robocopy;
+
 use std::path::{Path, PathBuf};
+use tauri::{Manager, State};
 use tauri_plugin_sql::{Builder, Migration, MigrationKind};
+
+struct RobocopyStatus {
+    is_available: bool,
+}
 
 fn normalize_path(path: &Path) -> PathBuf {
     path.components().collect()
@@ -26,6 +33,11 @@ fn are_paths_different(path1: String, path2: String) -> bool {
     normalize_path(path1) != normalize_path(path2)
 }
 
+#[tauri::command]
+fn is_robocopy_available(state: State<'_, RobocopyStatus>) -> bool {
+    state.is_available
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let migrations = vec![Migration {
@@ -36,6 +48,12 @@ pub fn run() {
     }];
 
     tauri::Builder::default()
+        .setup(|app| {
+            app.manage(RobocopyStatus {
+                is_available: robocopy::is_available(),
+            });
+            Ok(())
+        })
         .plugin(
             Builder::default()
                 .add_migrations("sqlite:database.sqlite", migrations)
@@ -43,7 +61,11 @@ pub fn run() {
         )
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![validate_path, are_paths_different])
+        .invoke_handler(tauri::generate_handler![
+            validate_path,
+            are_paths_different,
+            is_robocopy_available
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
