@@ -7,6 +7,7 @@ import {
     pathSchema,
 } from '../../../schemas/copyActionSchemas.ts'
 import useCopyAction from '../../../hooks/useCopyAction.ts'
+import CopyModeInput from './CopyModeInput.tsx'
 
 function CopyActionCreationForm() {
     const { addCopyAction } = useCopyAction()
@@ -22,6 +23,8 @@ function CopyActionCreationForm() {
     const dstDirRef = useRef<HTMLInputElement>(null)
     const [dstDirPath, setDstDirPath] = useState('')
     const [dstDirPathError, setDstDirPathError] = useState<string>('')
+
+    const [mode, setMode] = useState(0)
 
     const validateTitle = (val: string): boolean => {
         setTitleError(val.length > 0 ? '' : 'Title can not be empty')
@@ -85,6 +88,7 @@ function CopyActionCreationForm() {
             title,
             srcDirPath,
             dstDirPath,
+            mode,
         })
         await addCopyAction(copyAction)
     }
@@ -149,6 +153,7 @@ function CopyActionCreationForm() {
                     validate={validatePath}
                     inputRef={dstDirRef}
                 />
+                <CopyModeInput value={mode} setValue={setMode} />
                 <div className="flex justify-end">
                     <button
                         type="submit"

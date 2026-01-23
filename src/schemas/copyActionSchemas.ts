@@ -8,11 +8,17 @@ export const pathSchema = z.string().superRefine(async (path, ctx) => {
     }
 })
 
+export const Mode = {
+    Copy: 0,
+    Mirror: 1,
+}
+
 const copyActionBaseSchema = z
     .object({
         title: z.string().min(1, 'Title can not be empty'),
         srcDirPath: pathSchema,
         dstDirPath: pathSchema,
+        mode: z.enum(Mode),
     })
     .superRefine(async (data, ctx) => {
         const { srcDirPath, dstDirPath } = data

@@ -7,7 +7,11 @@ type CopyActionViewProps = {
 function CopyActionView(props: CopyActionViewProps) {
     const { getCopyAction } = useCopyAction()
     const copyAction = getCopyAction(props.id)!
-    return <div>{copyAction.title}</div>
+    return (
+        <div>
+            {copyAction.title} {copyAction.id} {copyAction.mode}
+        </div>
+    )
 }
 
 export default CopyActionView
