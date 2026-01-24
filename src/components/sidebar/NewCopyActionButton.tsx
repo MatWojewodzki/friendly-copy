@@ -4,7 +4,6 @@ import React from 'react'
 import { SelectedPage } from '../../App.tsx'
 
 type NewCopyActionButtonProps = {
-    selectedPage: SelectedPage
     setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
 }
 
