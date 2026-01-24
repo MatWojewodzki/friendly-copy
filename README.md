@@ -8,16 +8,16 @@
         - sidebar collapsing
     - mainAreaContent context
     - sidebar items:
-        - action list item
+        - job list item
     - main area:
-        - action display
-        - action form:
+        - job display
+        - job form:
             - `DirPathInput` validation, error messages, error styling
     - database:
         - creation (migration), schema
         - insert function
         - list function
-        - action details function
+        - job details function
 - Rust:
     - backend detection
     - command builder and backend runner

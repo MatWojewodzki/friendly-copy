@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mode } from '../../../schemas/copyActionSchemas.ts'
+import { Mode } from '../../../schemas/copyJobSchemas.ts'
 
 type CopyModeInputProps = {
     value: number

@@ -42,8 +42,8 @@ fn is_robocopy_available(state: State<'_, RobocopyStatus>) -> bool {
 pub fn run() {
     let migrations = vec![Migration {
         version: 1,
-        description: "create_copy_action_table",
-        sql: include_str!("../migrations/0001_create_copy_action_table.sql"),
+        description: "create_copy_job_table",
+        sql: include_str!("../migrations/0001_create_copy_job_table.sql"),
         kind: MigrationKind::Up,
     }];
 

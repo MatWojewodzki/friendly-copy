@@ -13,7 +13,7 @@ export const Mode = {
     Mirror: 1,
 }
 
-const copyActionBaseSchema = z
+const copyJobBaseSchema = z
     .object({
         title: z.string().min(1, 'Title can not be empty'),
         srcDirPath: pathSchema,
@@ -31,10 +31,10 @@ const copyActionBaseSchema = z
         }
     })
 
-export const copyActionSchema = copyActionBaseSchema.extend({ id: z.uuidv4() })
+export const copyJobSchema = copyJobBaseSchema.extend({ id: z.uuidv4() })
 
-export type CopyAction = z.infer<typeof copyActionSchema>
+export type CopyJob = z.infer<typeof copyJobSchema>
 
-export const userInputCopyActionSchema = copyActionBaseSchema.extend({
+export const userInputCopyJobSchema = copyJobBaseSchema.extend({
     id: z.uuidv4().default(() => crypto.randomUUID()),
 })

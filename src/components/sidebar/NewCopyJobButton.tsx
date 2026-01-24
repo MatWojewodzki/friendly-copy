@@ -3,11 +3,11 @@ import IconComponent from '../../assets/add_24dp_000000_FILL0_wght400_GRAD0_opsz
 import React from 'react'
 import { SelectedPage } from '../../App.tsx'
 
-type NewCopyActionButtonProps = {
+type NewCopyJobButtonProps = {
     setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
 }
 
-function NewCopyActionButton(props: NewCopyActionButtonProps) {
+function NewCopyJobButton(props: NewCopyJobButtonProps) {
     return (
         <button
             className={classNames(
@@ -17,9 +17,9 @@ function NewCopyActionButton(props: NewCopyActionButtonProps) {
             onClick={() => props.setSelectedPage('new')}
         >
             <IconComponent className="size-6 shrink-0" />
-            <p className="truncate">New Copy Action</p>
+            <p className="truncate">New Copy Job</p>
         </button>
     )
 }
 
-export default NewCopyActionButton
+export default NewCopyJobButton

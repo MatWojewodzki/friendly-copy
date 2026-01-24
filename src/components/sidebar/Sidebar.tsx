@@ -1,8 +1,8 @@
 import Resizer from './Resizer.tsx'
 import classNames from 'classnames'
 import React, { useState } from 'react'
-import NewCopyActionButton from './NewCopyActionButton.tsx'
-import CopyActionList from './CopyActionList.tsx'
+import NewCopyJobButton from './NewCopyJobButton.tsx'
+import CopyJobList from './CopyJobList.tsx'
 import { SelectedPage } from '../../App.tsx'
 
 type SidebarProps = {
@@ -21,8 +21,8 @@ function Sidebar(props: SidebarProps) {
                 'rounded-r-lg shadow-lg'
             )}
         >
-            <NewCopyActionButton setSelectedPage={props.setSelectedPage} />
-            <CopyActionList
+            <NewCopyJobButton setSelectedPage={props.setSelectedPage} />
+            <CopyJobList
                 selectedPage={props.selectedPage}
                 setSelectedPage={props.setSelectedPage}
             />

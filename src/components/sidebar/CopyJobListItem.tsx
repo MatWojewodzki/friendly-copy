@@ -1,16 +1,16 @@
-import { CopyAction } from '../../schemas/copyActionSchemas.ts'
+import { CopyJob } from '../../schemas/copyJobSchemas.ts'
 import { SelectedPage } from '../../App.tsx'
 import React from 'react'
 import classNames from 'classnames'
 
-type CopyActionListItemProps = {
-    copyAction: CopyAction
+type CopyJobListItemProps = {
+    copyJob: CopyJob
     selectedPage: SelectedPage
     setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
 }
 
-function CopyActionListItem(props: CopyActionListItemProps) {
-    const { copyAction } = props
+function CopyJobListItem(props: CopyJobListItemProps) {
+    const { copyJob } = props
 
     return (
         <li className="flex flex-col">
@@ -19,15 +19,15 @@ function CopyActionListItem(props: CopyActionListItemProps) {
                 className={classNames(
                     'ps-4 py-4 cursor-pointer text-start truncate',
                     'hover:bg-neutral-300 focus:outline-none focus:bg-neutral-300',
-                    { 'bg-neutral-200': props.selectedPage === copyAction.id }
+                    { 'bg-neutral-200': props.selectedPage === copyJob.id }
                 )}
-                key={copyAction.id}
-                onClick={() => props.setSelectedPage(copyAction.id)}
+                key={copyJob.id}
+                onClick={() => props.setSelectedPage(copyJob.id)}
             >
-                {copyAction.title}
+                {copyJob.title}
             </button>
         </li>
     )
 }
 
-export default CopyActionListItem
+export default CopyJobListItem

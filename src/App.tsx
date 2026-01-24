@@ -1,7 +1,7 @@
 import './main.css'
 import Sidebar from './components/sidebar/Sidebar.tsx'
 import MainArea from './components/mainArea/MainArea.tsx'
-import { CopyActionProvider } from './contexts/copyActionContext.tsx'
+import { CopyJobProvider } from './contexts/copyJobContext.tsx'
 import { useEffect, useState } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import { message } from '@tauri-apps/plugin-dialog'
@@ -14,7 +14,7 @@ function App() {
         invoke<boolean>('is_robocopy_available').then((is_available) => {
             if (!is_available) {
                 message(
-                    "Robocopy is not available on this system. You won't be able to run any Copy Actions.",
+                    "Robocopy is not available on this system. You won't be able to run any Copy Jobs.",
                     {
                         kind: 'error',
                     }
@@ -23,7 +23,7 @@ function App() {
         })
     }, [])
     return (
-        <CopyActionProvider>
+        <CopyJobProvider>
             <div className="flex h-screen bg-neutral-100">
                 <Sidebar
                     selectedPage={selectedPage}
@@ -31,7 +31,7 @@ function App() {
                 />
                 <MainArea selectedPage={selectedPage} />
             </div>
-        </CopyActionProvider>
+        </CopyJobProvider>
     )
 }
 

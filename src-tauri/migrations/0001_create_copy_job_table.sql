@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS copy_action (
+CREATE TABLE IF NOT EXISTS copy_job (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
     src_path TEXT NOT NULL,

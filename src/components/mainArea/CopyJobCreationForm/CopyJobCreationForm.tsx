@@ -3,14 +3,14 @@ import DirPathInput from './DirPathInput.tsx'
 import Input from './Input.tsx'
 import { invoke } from '@tauri-apps/api/core'
 import {
-    userInputCopyActionSchema,
+    userInputCopyJobSchema,
     pathSchema,
-} from '../../../schemas/copyActionSchemas.ts'
-import useCopyAction from '../../../hooks/useCopyAction.ts'
+} from '../../../schemas/copyJobSchemas.ts'
+import useCopyJob from '../../../hooks/useCopyJob.ts'
 import ModeInput from './ModeInput.tsx'
 
-function CopyActionCreationForm() {
-    const { addCopyAction } = useCopyAction()
+function CopyJobCreationForm() {
+    const { addCopyJob } = useCopyJob()
 
     const titleRef = useRef<HTMLInputElement>(null)
     const [title, setTitle] = useState('')
@@ -84,19 +84,19 @@ function CopyActionCreationForm() {
             return
         }
 
-        const copyAction = await userInputCopyActionSchema.parseAsync({
+        const copyJob = await userInputCopyJobSchema.parseAsync({
             title,
             srcDirPath,
             dstDirPath,
             mode,
         })
-        await addCopyAction(copyAction)
+        await addCopyJob(copyJob)
     }
 
     return (
         <div className="flex flex-col">
             <h1 className="font-bold text-2xl text-center mb-8">
-                Create new Copy Action
+                Create a new Copy Job
             </h1>
             <form className="flex flex-col" onSubmit={handleFormSubmit}>
                 <label
@@ -167,4 +167,4 @@ function CopyActionCreationForm() {
     )
 }
 
-export default CopyActionCreationForm
+export default CopyJobCreationForm
