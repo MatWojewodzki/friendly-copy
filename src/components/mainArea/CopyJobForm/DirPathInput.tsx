@@ -4,6 +4,7 @@ import FolderIcon from '../../../assets/folder_20dp_000000_FILL0_wght400_GRAD0_o
 import React from 'react'
 import Input from './Input.tsx'
 import { pathSchema } from '../../../schemas/copyJobSchemas.ts'
+import Tooltip from '../../Tooltip.tsx'
 
 type DirPathInputProps = {
     value: string
@@ -68,8 +69,11 @@ function DirPathInput(props: DirPathInputProps) {
                 type="button"
                 className="absolute right-1 top-1 rounded-sm hover:bg-neutral-300 focus:outline-none focus:ring ring-black"
                 onClick={handleBrowse}
+                aria-label="Browse"
             >
-                <FolderIcon className="size-5" />
+                <Tooltip text="Browse">
+                    <FolderIcon className="size-5" />
+                </Tooltip>
             </button>
         </div>
     )

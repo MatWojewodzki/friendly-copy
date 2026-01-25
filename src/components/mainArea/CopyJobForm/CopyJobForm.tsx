@@ -3,6 +3,7 @@ import ModeInput from './ModeInput.tsx'
 import DirPathInput from './DirPathInput.tsx'
 import Input from './Input.tsx'
 import { userInputCopyJobSchema } from '../../../schemas/copyJobSchemas.ts'
+import CopyJobFormLabel from './CopyJobFormLabel.tsx'
 
 export type FormInputProps = {
     ref: React.RefObject<HTMLInputElement>
@@ -87,10 +88,9 @@ function CopyJobForm(props: CopyJobFormProps) {
                 handleFormSubmit()
             }}
         >
-            <label htmlFor="titleInput" className="text-sm font-semibold mb-1">
-                Title
-            </label>
+            <CopyJobFormLabel htmlFor="titleInput">Title</CopyJobFormLabel>
             <Input
+                className="pe-2"
                 type="text"
                 id="titleInput"
                 name="title"
@@ -101,9 +101,9 @@ function CopyJobForm(props: CopyJobFormProps) {
                 aria-invalid={titleProps.error !== ''}
                 inputRef={titleProps.ref}
             />
-            <label htmlFor="srcInput" className="text-sm font-semibold mb-1">
+            <CopyJobFormLabel htmlFor="srcInput">
                 Source directory
-            </label>
+            </CopyJobFormLabel>
             <DirPathInput
                 id="srcInput"
                 name="src"
@@ -114,9 +114,9 @@ function CopyJobForm(props: CopyJobFormProps) {
                 setError={srcDirPathProps.setError}
                 inputRef={srcDirPathProps.ref}
             />
-            <label htmlFor="dstInput" className="text-sm font-semibold mb-1">
+            <CopyJobFormLabel htmlFor="dstInput">
                 Destination directory
-            </label>
+            </CopyJobFormLabel>
             <DirPathInput
                 id="dstInput"
                 name="dst"
@@ -127,10 +127,7 @@ function CopyJobForm(props: CopyJobFormProps) {
                 setError={dstDirPathProps.setError}
                 inputRef={dstDirPathProps.ref}
             />
-            <ModeInput
-                value={modeProps.value}
-                setValue={modeProps.setValue}
-            />
+            <ModeInput value={modeProps.value} setValue={modeProps.setValue} />
         </form>
     )
 }

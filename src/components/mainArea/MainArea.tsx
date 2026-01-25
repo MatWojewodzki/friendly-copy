@@ -1,6 +1,6 @@
-import CopyJobCreationForm from './CopyJobCreationForm.tsx'
+import CopyJobCreationPage from './CopyJobCreationPage.tsx'
 import { SelectedPage } from '../../App.tsx'
-import CopyJobView from './CopyJobView.tsx'
+import CopyJobViewPage from './CopyJobViewPage.tsx'
 import React from 'react'
 
 type MainAreaProps = {
@@ -12,9 +12,9 @@ function MainArea(props: MainAreaProps) {
     return (
         <main className="flex-1 p-8">
             {props.selectedPage === 'new' ? (
-                <CopyJobCreationForm setSelectedPage={props.setSelectedPage} />
+                <CopyJobCreationPage setSelectedPage={props.setSelectedPage} />
             ) : (
-                <CopyJobView id={props.selectedPage} />
+                <CopyJobViewPage id={props.selectedPage} />
             )}
         </main>
     )

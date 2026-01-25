@@ -4,12 +4,13 @@ import useCopyJob from '../../hooks/useCopyJob.ts'
 import { SelectedPage } from '../../App.tsx'
 import CopyJobForm from './CopyJobForm/CopyJobForm.tsx'
 import CopyJobFormButton from './CopyJobForm/CopyJobFormButton.tsx'
+import MainAreaHeader from './MainAreaHeader.tsx'
 
 type CopyJobCreationFormProps = {
     setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
 }
 
-function CopyJobCreationForm(props: CopyJobCreationFormProps) {
+function CopyJobCreationPage(props: CopyJobCreationFormProps) {
     const { addCopyJob } = useCopyJob()
 
     const titleRef = useRef<HTMLInputElement>(null)
@@ -39,9 +40,7 @@ function CopyJobCreationForm(props: CopyJobCreationFormProps) {
 
     return (
         <div className="flex flex-col">
-            <h1 className="font-bold text-2xl text-center mb-8">
-                Create a new Copy Job
-            </h1>
+            <MainAreaHeader>Create a new Copy Job</MainAreaHeader>
             <CopyJobForm
                 formId={'copyJobCreationForm'}
                 titleProps={{
@@ -77,4 +76,4 @@ function CopyJobCreationForm(props: CopyJobCreationFormProps) {
     )
 }
 
-export default CopyJobCreationForm
+export default CopyJobCreationPage
