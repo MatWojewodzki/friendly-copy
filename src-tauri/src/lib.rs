@@ -14,10 +14,6 @@ fn normalize_path(path: &Path) -> PathBuf {
 
 #[tauri::command]
 fn validate_path(path: String) -> String {
-    if path.is_empty() {
-        return "Path cannot be empty".into();
-    }
-
     let path = Path::new(&path);
     if !path.is_absolute() {
         return "Path must be absolute".into();

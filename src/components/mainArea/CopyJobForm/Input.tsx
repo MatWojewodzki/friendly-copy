@@ -18,7 +18,8 @@ function Input({ error, className, id, inputRef, ...props }: InputProps) {
                 className={classNames(
                     'h-7 mb-1 ps-2 py-1 flex-1 text-sm',
                     'border border-neutral-500 aria-invalid:border-red-700 rounded-sm',
-                    'focus:outline-none focus:ring-1 ring-black aria-invalid:ring-red-700'
+                    'focus:outline-none focus:ring-1 ring-black aria-invalid:ring-red-700',
+                    className
                 )}
                 {...props}
                 autoComplete="off"

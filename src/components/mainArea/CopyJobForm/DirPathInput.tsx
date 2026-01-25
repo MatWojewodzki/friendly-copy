@@ -3,6 +3,7 @@ import { homeDir } from '@tauri-apps/api/path'
 import FolderIcon from '../../../assets/folder_20dp_000000_FILL0_wght400_GRAD0_opsz20.svg?react'
 import React from 'react'
 import Input from './Input.tsx'
+import { pathSchema } from '../../../schemas/copyJobSchemas.ts'
 
 type DirPathInputProps = {
     value: string
@@ -12,39 +13,52 @@ type DirPathInputProps = {
     placeholder?: string
     error: string
     setError: React.Dispatch<React.SetStateAction<string>>
-    validate: (
-        path: string,
-        setError: React.Dispatch<React.SetStateAction<string>>,
-        onlyRemoveError: boolean
-    ) => Promise<any>
     inputRef?: React.LegacyRef<HTMLInputElement>
 }
 
 function DirPathInput(props: DirPathInputProps) {
+    const validatePath = async (
+        path: string,
+        onlyRemoveError: boolean
+    ): Promise<boolean> => {
+        if (path === '') {
+            props.setError('')
+            return false
+        }
+        const result = await pathSchema.safeParseAsync(path)
+        const issue = result.success
+            ? null
+            : result.error.issues.find((issue) => issue.code != 'too_small')
+        const error = issue ? issue.message : ''
+        if (!onlyRemoveError || error === '') {
+            props.setError(error)
+        }
+        return error === ''
+    }
+
     const handleBrowse = async () => {
         const dirPath = await open({
             directory: true,
             defaultPath: await homeDir(),
         })
         if (!dirPath) return
-        await props.validate(dirPath, props.setError, false)
+        await validatePath(dirPath, false)
         props.setValue(dirPath)
     }
 
     return (
         <div className="relative flex flex-col">
             <Input
+                className="pe-7"
                 type={'text'}
                 id={props.id}
                 name={props.name}
                 value={props.value}
                 onChange={async (e) => {
                     props.setValue(e.target.value)
-                    await props.validate(e.target.value, props.setError, true)
+                    await validatePath(e.target.value, true)
                 }}
-                onBlur={(e) =>
-                    props.validate(e.target.value, props.setError, false)
-                }
+                onBlur={(e) => validatePath(e.target.value, false)}
                 placeholder={props.placeholder}
                 error={props.error}
                 aria-invalid={props.error !== ''}

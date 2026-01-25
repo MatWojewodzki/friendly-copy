@@ -1,12 +1,15 @@
 import * as z from 'zod'
 import { invoke } from '@tauri-apps/api/core'
 
-export const pathSchema = z.string().superRefine(async (path, ctx) => {
-    const error: string = await invoke('validate_path', { path })
-    if (error != '') {
-        ctx.addIssue(error)
-    }
-})
+export const pathSchema = z
+    .string()
+    .min(1, 'Path can not be empty')
+    .superRefine(async (path, ctx) => {
+        const error: string = await invoke('validate_path', { path })
+        if (error != '') {
+            ctx.addIssue(error)
+        }
+    })
 
 export const Mode = {
     Copy: 0,
@@ -27,7 +30,11 @@ const copyJobBaseSchema = z
             path2: dstDirPath,
         })
         if (!arePathsDifferent) {
-            ctx.addIssue('Paths must be different')
+            ctx.addIssue({
+                code: 'custom',
+                message: 'Source and destination paths must be different',
+                path: ['dstDirPath'],
+            })
         }
     })
 

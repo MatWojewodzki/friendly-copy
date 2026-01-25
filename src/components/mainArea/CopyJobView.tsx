@@ -9,7 +9,7 @@ function CopyJobView(props: CopyJobViewProps) {
     const copyJob = getCopyJob(props.id)!
     return (
         <div>
-            {copyJob.title} {copyJob.id} {copyJob.mode}
+            <h1 className="font-bold text-2xl text-center mb-8">{`Job: ${copyJob.title}`}</h1>
         </div>
     )
 }

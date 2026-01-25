@@ -29,7 +29,10 @@ function App() {
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                 />
-                <MainArea selectedPage={selectedPage} />
+                <MainArea
+                    selectedPage={selectedPage}
+                    setSelectedPage={setSelectedPage}
+                />
             </div>
         </CopyJobProvider>
     )
