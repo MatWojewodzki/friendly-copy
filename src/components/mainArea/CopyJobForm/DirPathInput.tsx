@@ -49,7 +49,7 @@ function DirPathInput(props: DirPathInputProps) {
     return (
         <div className="relative flex flex-col">
             <Input
-                className="pe-7"
+                className="pe-7 font-mono"
                 type={'text'}
                 id={props.id}
                 name={props.name}
