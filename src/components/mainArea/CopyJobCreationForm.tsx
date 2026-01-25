@@ -43,7 +43,6 @@ function CopyJobCreationForm(props: CopyJobCreationFormProps) {
                 Create a new Copy Job
             </h1>
             <CopyJobForm
-                readOnly={true}
                 formId={'copyJobCreationForm'}
                 titleProps={{
                     value: title,
