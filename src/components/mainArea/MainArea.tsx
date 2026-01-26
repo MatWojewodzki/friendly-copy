@@ -10,7 +10,7 @@ type MainAreaProps = {
 
 function MainArea(props: MainAreaProps) {
     return (
-        <main className="flex-1 p-8">
+        <main className="min-w-xs p-8 grow">
             {props.selectedPage === 'new' ? (
                 <CopyJobCreationPage setSelectedPage={props.setSelectedPage} />
             ) : (

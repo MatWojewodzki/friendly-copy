@@ -1,9 +1,9 @@
 import Resizer from './Resizer.tsx'
 import classNames from 'classnames'
-import React, { useState } from 'react'
 import NewCopyJobButton from './NewCopyJobButton.tsx'
 import CopyJobList from './CopyJobList.tsx'
 import { SelectedPage } from '../../App.tsx'
+import React, { useState } from 'react'
 
 type SidebarProps = {
     selectedPage: SelectedPage
@@ -12,12 +12,11 @@ type SidebarProps = {
 
 function Sidebar(props: SidebarProps) {
     const [width, setWidth] = useState(240)
-
     return (
         <nav
             style={{ width: `${width}px` }}
             className={classNames(
-                'relative flex flex-col',
+                'relative flex flex-col shrink-0',
                 'rounded-r-lg shadow-lg'
             )}
         >

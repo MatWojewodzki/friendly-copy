@@ -10,6 +10,7 @@ export type SelectedPage = string
 
 function App() {
     const [selectedPage, setSelectedPage] = useState<SelectedPage>('new')
+
     useEffect(() => {
         invoke<boolean>('is_robocopy_available').then((is_available) => {
             if (!is_available) {
@@ -24,7 +25,7 @@ function App() {
     }, [])
     return (
         <CopyJobProvider>
-            <div className="flex h-screen bg-neutral-100">
+            <div className="flex h-screen bg-neutral-100 overflow-clip">
                 <Sidebar
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}

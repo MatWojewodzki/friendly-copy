@@ -27,11 +27,11 @@ function DirPathView(props: DirPathViewProps) {
     return (
         <div
             className={classNames(
-                'relative h-7 ps-2 pe-7 py-1 mb-8 text-sm font-mono',
+                'relative flex h-7 ps-2 pe-7 py-1 mb-8',
                 'border border-neutral-500 rounded-sm'
             )}
         >
-            {props.path}
+            <span className="font-mono text-sm truncate">{props.path}</span>
             <button
                 type="button"
                 className="absolute right-1 top-1 rounded-sm hover:bg-neutral-300 focus:outline-none focus:ring ring-black"
