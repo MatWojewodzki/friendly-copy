@@ -1,14 +1,36 @@
 import useCopyJob from '../../hooks/useCopyJob.ts'
 import MainAreaHeader from './MainAreaHeader.tsx'
 import DirPathView from './DirPathView.tsx'
+import CopyJobFormButton from './CopyJobForm/CopyJobFormButton.tsx'
+import { SelectedPage } from '../../App.tsx'
+import React, { useState} from 'react'
+import CopyJobEditPage from './CopyJobEditPage.tsx'
 
 type CopyJobViewProps = {
     id: string
+    setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
 }
 
 function CopyJobViewPage(props: CopyJobViewProps) {
-    const { getCopyJob } = useCopyJob()
+    const [isEditing, setIsEditing] = useState(false)
+    const { getCopyJob, deleteCopyJob } = useCopyJob()
     const copyJob = getCopyJob(props.id)!
+
+    const handleEdit = () => setIsEditing(true)
+
+    const handleDelete = async () => {
+        await deleteCopyJob(copyJob.id)
+        props.setSelectedPage('new')
+    }
+
+    if (isEditing) {
+        return (
+            <CopyJobEditPage
+                copyJob={copyJob}
+                closeEdit={() => setIsEditing(false)}
+            />
+        )
+    }
     return (
         <div className="flex flex-col">
             <MainAreaHeader>{`Job: ${copyJob.title}`}</MainAreaHeader>
@@ -19,7 +41,17 @@ function CopyJobViewPage(props: CopyJobViewProps) {
             </h2>
             <DirPathView path={copyJob.dstDirPath} />
             <h2 className="text-sm font-semibold mb-1">Copy mode</h2>
-            <p className="text-sm">{copyJob.mode === 0 ? 'Copy' : 'Mirror'}</p>
+            <p className="text-sm mb-8">
+                {copyJob.mode === 0 ? 'Copy' : 'Mirror'}
+            </p>
+            <div className="flex justify-end gap-4">
+                <CopyJobFormButton type="button" onClick={handleEdit}>
+                    Edit
+                </CopyJobFormButton>
+                <CopyJobFormButton type="button" onClick={handleDelete}>
+                    Delete
+                </CopyJobFormButton>
+            </div>
         </div>
     )
 }

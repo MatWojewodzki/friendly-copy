@@ -19,13 +19,13 @@ async function mapRowToCopyJob(row: CopyJobRow): Promise<CopyJob> {
     })
 }
 
-export async function listCopyJobs(): Promise<CopyJob[]> {
+async function listCopyJobs(): Promise<CopyJob[]> {
     const db = await getDb()
     const rows = await db.select<CopyJobRow[]>('SELECT * FROM copy_job')
     return await Promise.all(rows.map(mapRowToCopyJob))
 }
 
-export async function insertCopyJob(copyJob: CopyJob): Promise<void> {
+async function insertCopyJob(copyJob: CopyJob): Promise<void> {
     const db = await getDb()
     await db.execute(
         'INSERT INTO copy_job (id, title, src_path, dst_path, mode) VALUES ($1, $2, $3, $4, $5)',
@@ -38,3 +38,33 @@ export async function insertCopyJob(copyJob: CopyJob): Promise<void> {
         ]
     )
 }
+
+async function deleteCopyJob(id: string): Promise<void> {
+    const db = await getDb()
+    await db.execute('DELETE FROM copy_job WHERE id = $1', [id])
+}
+
+async function editCopyJob(copyJob: CopyJob): Promise<void> {
+    const db = await getDb()
+    console.log(
+        await db.execute(
+            'UPDATE copy_job SET title = $1, src_path = $2, dst_path = $3, mode = $4 WHERE id = $5',
+            [
+                copyJob.title,
+                copyJob.srcDirPath,
+                copyJob.dstDirPath,
+                copyJob.mode,
+                copyJob.id,
+            ]
+        )
+    )
+}
+
+const copyJobRepository = {
+    listCopyJobs,
+    insertCopyJob,
+    deleteCopyJob,
+    editCopyJob,
+}
+
+export default copyJobRepository

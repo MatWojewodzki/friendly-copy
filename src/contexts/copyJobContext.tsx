@@ -1,14 +1,13 @@
 import React, { createContext, useEffect, useState } from 'react'
-import {
-    insertCopyJob,
-    listCopyJobs,
-} from '../repositories/copyJobRepository.ts'
+import copyJobRepository from '../repositories/copyJobRepository.ts'
 import { CopyJob } from '../schemas/copyJobSchemas.ts'
 
 export type CopyJobContextValue = {
     getCopyJobs: () => CopyJob[]
-    addCopyJob: (copyJob: CopyJob) => Promise<void>
     getCopyJob: (id: string) => CopyJob | undefined
+    createCopyJob: (copyJob: CopyJob) => Promise<void>
+    deleteCopyJob: (id: string) => Promise<void>
+    editCopyJob: (copyJob: CopyJob) => Promise<void>
 }
 
 export const CopyJobContext = createContext<CopyJobContextValue | null>(null)
@@ -24,14 +23,26 @@ export function CopyJobProvider({ children }: { children: React.ReactNode }) {
         return copyJobs.find((copyJob) => copyJob.id === id)
     }
 
-    const addCopyJob = async (copyJob: CopyJob): Promise<void> => {
-        await insertCopyJob(copyJob)
+    const createCopyJob = async (copyJob: CopyJob): Promise<void> => {
+        await copyJobRepository.insertCopyJob(copyJob)
         setCopyJobs([...copyJobs, copyJob])
+    }
+
+    const deleteCopyJob = async (id: string): Promise<void> => {
+        await copyJobRepository.deleteCopyJob(id)
+        setCopyJobs(copyJobs.filter((copyJob) => copyJob.id !== id))
+    }
+
+    const editCopyJob = async (copyJob: CopyJob): Promise<void> => {
+        await copyJobRepository.editCopyJob(copyJob)
+        setCopyJobs(
+            copyJobs.map((job) => (job.id === copyJob.id ? copyJob : job))
+        )
     }
 
     useEffect(() => {
         const loadCopyJobs = async () => {
-            setCopyJobs(await listCopyJobs())
+            setCopyJobs(await copyJobRepository.listCopyJobs())
         }
         loadCopyJobs().catch(console.error)
     }, [])
@@ -41,7 +52,9 @@ export function CopyJobProvider({ children }: { children: React.ReactNode }) {
             value={{
                 getCopyJobs,
                 getCopyJob,
-                addCopyJob,
+                createCopyJob,
+                deleteCopyJob,
+                editCopyJob,
             }}
         >
             {children}

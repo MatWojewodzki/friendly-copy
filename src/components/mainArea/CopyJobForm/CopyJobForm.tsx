@@ -1,53 +1,59 @@
-import React from 'react'
+import { useRef, useState } from 'react'
 import ModeInput from './ModeInput.tsx'
 import DirPathInput from './DirPathInput.tsx'
 import Input from './Input.tsx'
-import { userInputCopyJobSchema } from '../../../schemas/copyJobSchemas.ts'
+import {
+    CopyJob,
+    copyJobSchema,
+    userInputCopyJobSchema,
+} from '../../../schemas/copyJobSchemas.ts'
 import CopyJobFormLabel from './CopyJobFormLabel.tsx'
-
-export type FormInputProps = {
-    ref: React.RefObject<HTMLInputElement>
-    value: string
-    setValue: React.Dispatch<React.SetStateAction<string>>
-    error: string
-    setError: React.Dispatch<React.SetStateAction<string>>
-}
-
-export type ModeProps = {
-    value: number
-    setValue: React.Dispatch<React.SetStateAction<number>>
-}
 
 type CopyJobFormProps = {
     formId: string
-    titleProps: FormInputProps
-    srcDirPathProps: FormInputProps
-    dstDirPathProps: FormInputProps
-    modeProps: ModeProps
-    handleFormSubmit: () => void
+    handleFormSubmit: (copyJob: CopyJob) => void
+    originalCopyJob?: CopyJob
 }
 
 function CopyJobForm(props: CopyJobFormProps) {
-    const {
-        formId,
-        titleProps,
-        srcDirPathProps,
-        dstDirPathProps,
-        modeProps,
-        handleFormSubmit,
-    } = props
+    const originalCopyJob = props.originalCopyJob
 
-    const validateForm = async () => {
-        const result = await userInputCopyJobSchema.safeParseAsync({
-            title: titleProps.value,
-            srcDirPath: srcDirPathProps.value,
-            dstDirPath: dstDirPathProps.value,
-            mode: modeProps.value,
-        })
-        console.log(result)
+    const titleRef = useRef<HTMLInputElement>(null)
+    const [title, setTitle] = useState(originalCopyJob?.title ?? '')
+    const [titleError, setTitleError] = useState<string>('')
+
+    const srcDirRef = useRef<HTMLInputElement>(null)
+    const [srcDirPath, setSrcDirPath] = useState(
+        originalCopyJob?.srcDirPath ?? ''
+    )
+    const [srcDirPathError, setSrcDirPathError] = useState<string>('')
+
+    const dstDirRef = useRef<HTMLInputElement>(null)
+    const [dstDirPath, setDstDirPath] = useState(
+        originalCopyJob?.dstDirPath ?? ''
+    )
+    const [dstDirPathError, setDstDirPathError] = useState<string>('')
+
+    const [mode, setMode] = useState(originalCopyJob?.mode ?? 0)
+
+    const validateForm = async (): Promise<CopyJob | null> => {
+        const result = originalCopyJob
+            ? await copyJobSchema.safeParseAsync({
+                  id: originalCopyJob.id,
+                  title,
+                  srcDirPath,
+                  dstDirPath,
+                  mode,
+              })
+            : await userInputCopyJobSchema.safeParseAsync({
+                  title,
+                  srcDirPath,
+                  dstDirPath,
+                  mode,
+              })
 
         if (result.success) {
-            return
+            return result.data
         }
 
         const issues = result.error.issues
@@ -65,27 +71,30 @@ function CopyJobForm(props: CopyJobFormProps) {
         const srcDirPathError = srcDirPathIssue ? srcDirPathIssue.message : ''
         const dstDirPathError = dstDirPathIssue ? dstDirPathIssue.message : ''
 
-        titleProps.setError(titleError)
-        srcDirPathProps.setError(srcDirPathError)
-        dstDirPathProps.setError(dstDirPathError)
+        setTitleError(titleError)
+        setSrcDirPathError(srcDirPathError)
+        setDstDirPathError(dstDirPathError)
 
         if (titleError != '') {
-            titleProps.ref.current?.focus()
+            titleRef.current?.focus()
         } else if (srcDirPathError != '') {
-            srcDirPathProps.ref.current?.focus()
+            srcDirRef.current?.focus()
         } else if (dstDirPathError != '') {
-            dstDirPathProps.ref.current?.focus()
+            dstDirRef.current?.focus()
         }
+
+        return null
     }
 
     return (
         <form
-            id={formId}
+            id={props.formId}
             className="flex flex-col"
             onSubmit={async (e) => {
                 e.preventDefault()
-                await validateForm()
-                handleFormSubmit()
+                const copyJob = await validateForm()
+                if (!copyJob) return
+                props.handleFormSubmit(copyJob)
             }}
         >
             <CopyJobFormLabel htmlFor="titleInput">Title</CopyJobFormLabel>
@@ -94,12 +103,12 @@ function CopyJobForm(props: CopyJobFormProps) {
                 type="text"
                 id="titleInput"
                 name="title"
-                value={titleProps.value}
-                onChange={(e) => titleProps.setValue(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder={'Backup Documents to the D: drive'}
-                error={titleProps.error}
-                aria-invalid={titleProps.error !== ''}
-                inputRef={titleProps.ref}
+                error={titleError}
+                aria-invalid={titleError !== ''}
+                inputRef={titleRef}
             />
             <CopyJobFormLabel htmlFor="srcInput">
                 Source directory
@@ -107,12 +116,12 @@ function CopyJobForm(props: CopyJobFormProps) {
             <DirPathInput
                 id="srcInput"
                 name="src"
-                value={srcDirPathProps.value}
-                setValue={srcDirPathProps.setValue}
+                value={srcDirPath}
+                setValue={setSrcDirPath}
                 placeholder={'C:\\path\\to\\source\\directory'}
-                error={srcDirPathProps.error}
-                setError={srcDirPathProps.setError}
-                inputRef={srcDirPathProps.ref}
+                error={srcDirPathError}
+                setError={setSrcDirPathError}
+                inputRef={srcDirRef}
             />
             <CopyJobFormLabel htmlFor="dstInput">
                 Destination directory
@@ -120,14 +129,14 @@ function CopyJobForm(props: CopyJobFormProps) {
             <DirPathInput
                 id="dstInput"
                 name="dst"
-                value={dstDirPathProps.value}
-                setValue={dstDirPathProps.setValue}
+                value={dstDirPath}
+                setValue={setDstDirPath}
                 placeholder={'D:\\path\\to\\destination\\directory'}
-                error={dstDirPathProps.error}
-                setError={dstDirPathProps.setError}
-                inputRef={dstDirPathProps.ref}
+                error={dstDirPathError}
+                setError={setDstDirPathError}
+                inputRef={dstDirRef}
             />
-            <ModeInput value={modeProps.value} setValue={modeProps.setValue} />
+            <ModeInput value={mode} setValue={setMode} />
         </form>
     )
 }

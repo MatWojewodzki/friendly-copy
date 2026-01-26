@@ -14,7 +14,11 @@ function MainArea(props: MainAreaProps) {
             {props.selectedPage === 'new' ? (
                 <CopyJobCreationPage setSelectedPage={props.setSelectedPage} />
             ) : (
-                <CopyJobViewPage id={props.selectedPage} />
+                <CopyJobViewPage
+                    key={props.selectedPage}
+                    id={props.selectedPage}
+                    setSelectedPage={props.setSelectedPage}
+                />
             )}
         </main>
     )
