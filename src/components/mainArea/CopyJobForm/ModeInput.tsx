@@ -14,7 +14,7 @@ function ModeInput(props: CopyModeInputProps) {
     ]
     return (
         <fieldset className="flex flex-col mb-8">
-            <legend className="text-sm font-semibold mb-1">Copy mode</legend>
+            <legend className="text-sm font-semibold mb-1">Mode</legend>
             <div className="flex flex-col gap-1 ps-1">
                 {options.map((option) => (
                     <label

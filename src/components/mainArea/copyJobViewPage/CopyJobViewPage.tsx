@@ -65,7 +65,7 @@ function CopyJobViewPage(props: CopyJobViewProps) {
                 Destination directory
             </h2>
             <DirPathView path={copyJob.dstDirPath} />
-            <h2 className="text-sm font-semibold mb-1">Copy mode</h2>
+            <h2 className="text-sm font-semibold mb-1">Mode</h2>
             <p
                 className={classNames('text-sm mb-8', {
                     'text-red-700': copyJob.mode === Mode.Mirror,
