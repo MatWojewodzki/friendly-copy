@@ -7,6 +7,9 @@ import React, { useState } from 'react'
 import CopyJobEditPage from './CopyJobEditPage.tsx'
 import useCopyJobExecution from '../../hooks/useCopyJobExecution.ts'
 import CopyJobRunningPage from './CopyJobRunningPage.tsx'
+import classNames from 'classnames'
+import { Mode } from '../../schemas/copyJobSchemas.ts'
+import { confirm } from '@tauri-apps/plugin-dialog'
 
 type CopyJobViewProps = {
     id: string
@@ -24,6 +27,15 @@ function CopyJobViewPage(props: CopyJobViewProps) {
     const handleEdit = () => setIsEditing(true)
 
     const handleRun = async () => {
+        if (copyJob.mode === Mode.Mirror) {
+            const confirmation = await confirm(
+                'Are you sure you want to run this copy job in MIRROR mode? This action is destructive and will delete any files and directories in the destination directory that do not exist in the source directory. This action cannot be undone.',
+                { title: 'Confirm Mirror Mode', kind: 'warning' }
+            )
+            if (!confirmation) {
+                return
+            }
+        }
         await startCopyJob(copyJob)
     }
 
@@ -53,7 +65,11 @@ function CopyJobViewPage(props: CopyJobViewProps) {
             </h2>
             <DirPathView path={copyJob.dstDirPath} />
             <h2 className="text-sm font-semibold mb-1">Copy mode</h2>
-            <p className="text-sm mb-8">
+            <p
+                className={classNames('text-sm mb-8', {
+                    'text-red-700': copyJob.mode === Mode.Mirror,
+                })}
+            >
                 {copyJob.mode === 0 ? 'Copy' : 'Mirror'}
             </p>
             <div className="flex justify-end gap-4">

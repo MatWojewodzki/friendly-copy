@@ -1,5 +1,6 @@
 import React from 'react'
 import { Mode } from '../../../schemas/copyJobSchemas.ts'
+import classNames from 'classnames'
 
 type CopyModeInputProps = {
     value: number
@@ -18,7 +19,10 @@ function ModeInput(props: CopyModeInputProps) {
                 {options.map((option) => (
                     <label
                         key={option.value}
-                        className="text-sm flex items-center gap-1"
+                        className={classNames(
+                            'text-sm flex items-center gap-1',
+                            { 'text-red-700': option.value === Mode.Mirror }
+                        )}
                     >
                         <input
                             type="radio"
