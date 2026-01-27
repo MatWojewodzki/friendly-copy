@@ -5,6 +5,7 @@ import { CopyJobProvider } from './contexts/copyJobContext.tsx'
 import { useEffect, useState } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import { message } from '@tauri-apps/plugin-dialog'
+import { CopyJobExecutionProvider } from './contexts/copyJobExecutionContext.tsx'
 
 export type SelectedPage = string
 
@@ -25,16 +26,18 @@ function App() {
     }, [])
     return (
         <CopyJobProvider>
-            <div className="flex h-screen bg-neutral-100 overflow-clip">
-                <Sidebar
-                    selectedPage={selectedPage}
-                    setSelectedPage={setSelectedPage}
-                />
-                <MainArea
-                    selectedPage={selectedPage}
-                    setSelectedPage={setSelectedPage}
-                />
-            </div>
+            <CopyJobExecutionProvider>
+                <div className="flex h-screen bg-neutral-100 overflow-clip">
+                    <Sidebar
+                        selectedPage={selectedPage}
+                        setSelectedPage={setSelectedPage}
+                    />
+                    <MainArea
+                        selectedPage={selectedPage}
+                        setSelectedPage={setSelectedPage}
+                    />
+                </div>
+            </CopyJobExecutionProvider>
         </CopyJobProvider>
     )
 }

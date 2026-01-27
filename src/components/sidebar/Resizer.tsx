@@ -4,7 +4,7 @@ type ResizerProps = {
     setSidebarWidth: React.Dispatch<React.SetStateAction<number>>
 }
 
-const MIN_WIDTH = 100
+const MIN_WIDTH = 160
 
 function Resizer(props: ResizerProps) {
     const isDraggingRef = useRef(false)

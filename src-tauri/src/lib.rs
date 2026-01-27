@@ -1,6 +1,8 @@
 mod robocopy;
 
+use crate::robocopy::RobocopyState;
 use std::path::{Path, PathBuf};
+use std::sync::{Arc, Mutex};
 use tauri::{Manager, State};
 use tauri_plugin_sql::{Builder, Migration, MigrationKind};
 
@@ -49,6 +51,7 @@ pub fn run() {
             app.manage(RobocopyStatus {
                 is_available: robocopy::is_available(),
             });
+            app.manage(Arc::new(Mutex::new(RobocopyState::default())));
             Ok(())
         })
         .plugin(
@@ -61,7 +64,9 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             validate_path,
             are_paths_different,
-            is_robocopy_available
+            is_robocopy_available,
+            robocopy::start_copy_job,
+            robocopy::stop_copy_job,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
