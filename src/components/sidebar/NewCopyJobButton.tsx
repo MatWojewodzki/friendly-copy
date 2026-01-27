@@ -17,7 +17,7 @@ function NewCopyJobButton(props: NewCopyJobButtonProps) {
             onClick={() => props.setSelectedPage('new')}
         >
             <IconComponent className="size-6 shrink-0" />
-            <p className="truncate">New Copy Job</p>
+            <p className="truncate">New copy job</p>
         </button>
     )
 }

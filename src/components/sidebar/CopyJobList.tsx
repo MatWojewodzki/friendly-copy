@@ -16,7 +16,7 @@ function CopyJobList(props: CopyJobListProps) {
             <h2 className="px-2 mt-8 mb-2 font-semibold">Copy Jobs</h2>
             <ul className="overflow-y-auto">
                 {copyJobs.length === 0 && (
-                    <li className="text-sm text-center">No Copy Jobs</li>
+                    <li className="text-sm text-center">No copy jobs yet</li>
                 )}
                 {copyJobs.map((copyJob) => (
                     <CopyJobListItem

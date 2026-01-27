@@ -20,7 +20,7 @@ function CopyJobCreationPage(props: CopyJobCreationPageProps) {
 
     return (
         <div className="flex flex-col">
-            <MainAreaHeader>Create a new Copy Job</MainAreaHeader>
+            <MainAreaHeader>Create a new copy job</MainAreaHeader>
             <CopyJobForm
                 formId={'copyJobCreationForm'}
                 handleFormSubmit={handleFormSubmit}

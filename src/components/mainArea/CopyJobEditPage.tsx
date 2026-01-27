@@ -19,7 +19,7 @@ function CopyJobEditPage(props: CopyJobEditPageProps) {
 
     return (
         <div className="flex flex-col">
-            <MainAreaHeader>Edit Copy Job</MainAreaHeader>
+            <MainAreaHeader>Edit copy job</MainAreaHeader>
             <CopyJobForm
                 formId="copyJobEditForm"
                 handleFormSubmit={handleFormSubmit}
