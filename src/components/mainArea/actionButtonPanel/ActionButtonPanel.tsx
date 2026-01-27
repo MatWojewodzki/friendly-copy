@@ -6,7 +6,7 @@ export type ActionButtonPanelProps = {
 
 function ActionButtonPanel(props: ActionButtonPanelProps) {
     return (
-        <div className="flex justify-end gap-4">{props.children}</div>
+        <div className="flex justify-end gap-3">{props.children}</div>
     )
 }
 
