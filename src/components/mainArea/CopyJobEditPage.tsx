@@ -27,7 +27,7 @@ function CopyJobEditPage(props: CopyJobEditPageProps) {
             />
             <div className="flex justify-end gap-4">
                 <CopyJobFormButton type="submit" form="copyJobEditForm">
-                    Ok
+                    Save
                 </CopyJobFormButton>
                 <CopyJobFormButton type="button" onClick={props.closeEdit}>
                     Cancel
