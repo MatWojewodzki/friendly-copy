@@ -1,13 +1,13 @@
 import React from 'react'
 
-type FormButtonProps = {
+type ActionButtonProps = {
     type: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
     children?: React.ReactNode
     form?: string
     onClick?: () => void
 }
 
-function CopyJobFormButton(props: FormButtonProps) {
+function ActionButton(props: ActionButtonProps) {
     return (
         <button
             type={props.type}
@@ -20,4 +20,4 @@ function CopyJobFormButton(props: FormButtonProps) {
     )
 }
 
-export default CopyJobFormButton
+export default ActionButton

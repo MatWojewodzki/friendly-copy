@@ -1,6 +1,6 @@
 import CopyJobCreationPage from './CopyJobCreationPage.tsx'
 import { SelectedPage } from '../../App.tsx'
-import CopyJobViewPage from './CopyJobViewPage.tsx'
+import CopyJobViewPage from './copyJobViewPage/CopyJobViewPage.tsx'
 import React from 'react'
 
 type MainAreaProps = {

@@ -1,8 +1,9 @@
 import { CopyJob } from '../../schemas/copyJobSchemas.ts'
 import useCopyJob from '../../hooks/useCopyJob.ts'
 import CopyJobForm from './CopyJobForm/CopyJobForm.tsx'
-import CopyJobFormButton from './CopyJobForm/CopyJobFormButton.tsx'
+import ActionButton from './actionButtonPanel/ActionButton.tsx'
 import MainAreaHeader from './MainAreaHeader.tsx'
+import ActionButtonPanel from './actionButtonPanel/ActionButtonPanel.tsx'
 
 type CopyJobEditPageProps = {
     copyJob: CopyJob
@@ -25,14 +26,14 @@ function CopyJobEditPage(props: CopyJobEditPageProps) {
                 handleFormSubmit={handleFormSubmit}
                 originalCopyJob={props.copyJob}
             />
-            <div className="flex justify-end gap-4">
-                <CopyJobFormButton type="submit" form="copyJobEditForm">
+            <ActionButtonPanel>
+                <ActionButton type="submit" form="copyJobEditForm">
                     Save
-                </CopyJobFormButton>
-                <CopyJobFormButton type="button" onClick={props.closeEdit}>
+                </ActionButton>
+                <ActionButton type="button" onClick={props.closeEdit}>
                     Cancel
-                </CopyJobFormButton>
-            </div>
+                </ActionButton>
+            </ActionButtonPanel>
         </div>
     )
 }

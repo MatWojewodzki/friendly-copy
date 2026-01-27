@@ -1,6 +1,6 @@
 import MainAreaHeader from './MainAreaHeader.tsx'
 import useCopyJobExecution from '../../hooks/useCopyJobExecution.ts'
-import CopyJobFormButton from './CopyJobForm/CopyJobFormButton.tsx'
+import ActionButton from './actionButtonPanel/ActionButton.tsx'
 
 export type CopyJobRunningPageProps = {
     title: String
@@ -21,9 +21,9 @@ function CopyJobRunningPage(props: CopyJobRunningPageProps) {
                     This Copy Job is currently{' '}
                     <span className="text-green-700">running</span>.
                 </span>
-                <CopyJobFormButton type="button" onClick={handleStop}>
+                <ActionButton type="button" onClick={handleStop}>
                     Stop
-                </CopyJobFormButton>
+                </ActionButton>
             </div>
         </div>
     )

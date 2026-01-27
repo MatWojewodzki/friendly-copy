@@ -3,8 +3,9 @@ import { CopyJob } from '../../schemas/copyJobSchemas.ts'
 import useCopyJob from '../../hooks/useCopyJob.ts'
 import { SelectedPage } from '../../App.tsx'
 import CopyJobForm from './CopyJobForm/CopyJobForm.tsx'
-import CopyJobFormButton from './CopyJobForm/CopyJobFormButton.tsx'
+import ActionButton from './actionButtonPanel/ActionButton.tsx'
 import MainAreaHeader from './MainAreaHeader.tsx'
+import ActionButtonPanel from './actionButtonPanel/ActionButtonPanel.tsx'
 
 type CopyJobCreationPageProps = {
     setSelectedPage: React.Dispatch<React.SetStateAction<SelectedPage>>
@@ -25,11 +26,11 @@ function CopyJobCreationPage(props: CopyJobCreationPageProps) {
                 formId={'copyJobCreationForm'}
                 handleFormSubmit={handleFormSubmit}
             />
-            <div className="flex justify-end">
-                <CopyJobFormButton type="submit" form="copyJobCreationForm">
+            <ActionButtonPanel>
+                <ActionButton type="submit" form="copyJobCreationForm">
                     Create
-                </CopyJobFormButton>
-            </div>
+                </ActionButton>
+            </ActionButtonPanel>
         </div>
     )
 }

@@ -1,15 +1,16 @@
-import useCopyJob from '../../hooks/useCopyJob.ts'
-import MainAreaHeader from './MainAreaHeader.tsx'
+import useCopyJob from '../../../hooks/useCopyJob.ts'
+import MainAreaHeader from '../MainAreaHeader.tsx'
 import DirPathView from './DirPathView.tsx'
-import CopyJobFormButton from './CopyJobForm/CopyJobFormButton.tsx'
-import { SelectedPage } from '../../App.tsx'
+import ActionButton from '../actionButtonPanel/ActionButton.tsx'
+import { SelectedPage } from '../../../App.tsx'
 import React, { useState } from 'react'
-import CopyJobEditPage from './CopyJobEditPage.tsx'
-import useCopyJobExecution from '../../hooks/useCopyJobExecution.ts'
-import CopyJobRunningPage from './CopyJobRunningPage.tsx'
+import CopyJobEditPage from '../CopyJobEditPage.tsx'
+import useCopyJobExecution from '../../../hooks/useCopyJobExecution.ts'
+import CopyJobRunningPage from '../CopyJobRunningPage.tsx'
 import classNames from 'classnames'
-import { Mode } from '../../schemas/copyJobSchemas.ts'
+import { Mode } from '../../../schemas/copyJobSchemas.ts'
 import { confirm } from '@tauri-apps/plugin-dialog'
+import ActionButtonPanel from '../actionButtonPanel/ActionButtonPanel.tsx'
 
 type CopyJobViewProps = {
     id: string
@@ -72,16 +73,18 @@ function CopyJobViewPage(props: CopyJobViewProps) {
             >
                 {copyJob.mode === 0 ? 'Copy' : 'Mirror'}
             </p>
-            <div className="flex justify-end gap-4">
-                <CopyJobFormButton type="button" onClick={handleEdit}>
+            <ActionButtonPanel>
+                <ActionButton type="button" onClick={handleEdit}>
                     Edit
-                </CopyJobFormButton>
-                <CopyJobFormButton type="button" onClick={handleRun}>
+                </ActionButton>
+                <ActionButton type="button" onClick={handleRun}>
                     Run
-                </CopyJobFormButton>
-                <CopyJobFormButton type="button" onClick={handleDelete}>
+                </ActionButton>
+                <ActionButton type="button" onClick={handleDelete}>
                     Delete
-                </CopyJobFormButton>
+                </ActionButton>
+            </ActionButtonPanel>
+            <div className="flex justify-end gap-3">
             </div>
         </div>
     )

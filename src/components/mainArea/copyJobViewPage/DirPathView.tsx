@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
-import ContentCopyIcon from '../../assets/content_copy_20dp_000000_FILL0_wght400_GRAD0_opsz20.svg?react'
-import CheckIcon from '../../assets/check_20dp_000000_FILL0_wght400_GRAD0_opsz20.svg?react'
+import ContentCopyIcon from '../../../assets/content_copy_20dp_000000_FILL0_wght400_GRAD0_opsz20.svg?react'
+import CheckIcon from '../../../assets/check_20dp_000000_FILL0_wght400_GRAD0_opsz20.svg?react'
 import { useRef, useState } from 'react'
-import Tooltip from '../Tooltip.tsx'
+import Tooltip from '../../Tooltip.tsx'
 
 export type DirPathViewProps = {
     path: string
