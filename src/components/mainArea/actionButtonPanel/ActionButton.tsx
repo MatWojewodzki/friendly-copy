@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 type ActionButtonProps = {
     type: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
@@ -12,7 +13,10 @@ function ActionButton(props: ActionButtonProps) {
         <button
             type={props.type}
             form={props.form}
-            className="px-3 py-1 border border-neutral-500 rounded-lg hover:bg-neutral-300 focus:outline-none focus:ring ring-black text-sm"
+            className={classNames(
+                'px-3 py-1 border border-neutral-500 rounded-lg text-sm',
+                'hover:bg-neutral-300 focus:outline-none focus-visible:bg-neutral-300 focus-visible:ring ring-black '
+            )}
             onClick={props.onClick}
         >
             {props.children}

@@ -24,7 +24,7 @@ function CopyJobListItem(props: CopyJobListItemProps) {
                 type="button"
                 className={classNames(
                     'flex items-center gap-2 ps-4 pe-2 py-4 cursor-pointer focus:outline-none',
-                    'hover:bg-neutral-300 focus:bg-neutral-300',
+                    'hover:bg-neutral-300 focus-visible:bg-neutral-300',
                     { 'bg-neutral-200': isSelected }
                 )}
                 key={copyJob.id}

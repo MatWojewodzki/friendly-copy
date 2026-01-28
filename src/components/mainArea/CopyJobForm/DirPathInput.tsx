@@ -67,7 +67,7 @@ function DirPathInput(props: DirPathInputProps) {
             />
             <button
                 type="button"
-                className="absolute right-1 top-1 rounded-sm hover:bg-neutral-300 focus:outline-none focus:ring ring-black"
+                className="absolute right-1 top-1 rounded-sm hover:bg-neutral-300 focus:outline-none focus-visible:bg-neutral-300 focus-visible:ring ring-black"
                 onClick={handleBrowse}
                 aria-label="Browse"
             >

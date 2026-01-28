@@ -25,7 +25,6 @@ type CopyModeInputProps = {
     setValue: React.Dispatch<React.SetStateAction<number>>
 }
 
-
 function ModeInput(props: CopyModeInputProps) {
     return (
         <fieldset className="flex flex-col mb-8">
@@ -36,11 +35,12 @@ function ModeInput(props: CopyModeInputProps) {
                         <label
                             className={classNames(
                                 'text-sm flex items-center gap-1',
-                                {'text-red-700': option.value === Mode.Mirror}
+                                { 'text-red-700': option.value === Mode.Mirror }
                             )}
                         >
                             <input
                                 type="radio"
+                                className="focus:outline-none focus-visible:ring ring-black"
                                 name="mode"
                                 value={option.value}
                                 checked={props.value === option.value}
@@ -50,7 +50,10 @@ function ModeInput(props: CopyModeInputProps) {
                             />
                             {option.label}
                         </label>
-                        <ModeInfoTooltip modeName={option.modeName} description={option.description} />
+                        <ModeInfoTooltip
+                            modeName={option.modeName}
+                            description={option.description}
+                        />
                     </div>
                 ))}
             </div>

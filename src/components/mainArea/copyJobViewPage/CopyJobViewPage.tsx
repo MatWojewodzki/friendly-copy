@@ -29,7 +29,9 @@ function CopyJobViewPage(props: CopyJobViewProps) {
 
     const handleEdit = () => setIsEditing(true)
 
-    const modeOption = modeOptions.find((option) => option.value === copyJob.mode)!
+    const modeOption = modeOptions.find(
+        (option) => option.value === copyJob.mode
+    )!
 
     const handleRun = async () => {
         if (copyJob.mode === Mode.Mirror) {
@@ -95,7 +97,10 @@ function CopyJobViewPage(props: CopyJobViewProps) {
                 >
                     {modeOption.label}
                 </p>
-                <ModeInfoTooltip modeName={modeOption.modeName} description={modeOption.description} />
+                <ModeInfoTooltip
+                    modeName={modeOption.modeName}
+                    description={modeOption.description}
+                />
             </div>
             <ActionButtonPanel>
                 <ActionButton type="button" onClick={handleEdit}>

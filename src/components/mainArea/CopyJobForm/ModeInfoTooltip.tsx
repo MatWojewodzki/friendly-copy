@@ -7,19 +7,18 @@ type ModeInfoTooltipProps = {
 }
 
 function ModeInfoTooltip(props: ModeInfoTooltipProps) {
-    return <Tooltip
-        text={props.description}
-        id={`${props.modeName}ModeTooltip`}
-    >
-        <button
-            type="button"
-            className="p-1 hover:bg-neutral-300 focus:outline-none focus:bg-neutral-300 rounded-sm"
-            aria-label={`More info about ${props.modeName} mode`}
-            aria-describedby={`${props.modeName}ModeTooltip`}
-        >
-            <InfoIcon className="size-3"/>
-        </button>
-    </Tooltip>
+    return (
+        <Tooltip text={props.description} id={`${props.modeName}ModeTooltip`}>
+            <button
+                type="button"
+                className="p-1 hover:bg-neutral-300 focus:outline-none focus-visible:bg-neutral-300 focus-visible:ring ring-black rounded-sm"
+                aria-label={`More info about ${props.modeName} mode`}
+                aria-describedby={`${props.modeName}ModeTooltip`}
+            >
+                <InfoIcon className="size-3" />
+            </button>
+        </Tooltip>
+    )
 }
 
 export default ModeInfoTooltip

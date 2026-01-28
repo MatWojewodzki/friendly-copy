@@ -12,7 +12,7 @@ function NewCopyJobButton(props: NewCopyJobButtonProps) {
         <button
             className={classNames(
                 'py-4 ps-2 flex items-center gap-2',
-                ' cursor-pointer hover:bg-neutral-300 focus:outline-none focus:bg-neutral-300'
+                ' cursor-pointer hover:bg-neutral-300 focus:outline-none focus-visible:bg-neutral-300'
             )}
             onClick={() => props.setSelectedPage('new')}
         >
