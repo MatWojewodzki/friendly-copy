@@ -30,8 +30,13 @@ function CopyJobViewPage(props: CopyJobViewProps) {
     const handleRun = async () => {
         if (copyJob.mode === Mode.Mirror) {
             const confirmation = await confirm(
-                'Are you sure you want to run this copy job in MIRROR mode? This action is destructive and will delete any files and directories in the destination directory that do not exist in the source directory. This action cannot be undone.',
-                { title: 'Confirm Mirror Mode', kind: 'warning' }
+                'Are you sure you want to run this copy job in Mirror mode?\nThis action is destructive and will delete any files and directories in the destination directory that do not exist in the source directory. This action cannot be undone.',
+                {
+                    title: 'Confirm Mirror Mode',
+                    kind: 'warning',
+                    okLabel: 'Run',
+                    cancelLabel: 'Cancel',
+                }
             )
             if (!confirmation) {
                 return
@@ -41,6 +46,18 @@ function CopyJobViewPage(props: CopyJobViewProps) {
     }
 
     const handleDelete = async () => {
+        const confirmation = await confirm(
+            'Are you sure you want to delete this copy job?\nThis action cannot be undone.',
+            {
+                title: 'Confirm Delete',
+                kind: 'warning',
+                okLabel: 'Delete',
+                cancelLabel: 'Cancel',
+            }
+        )
+        if (!confirmation) {
+            return
+        }
         await deleteCopyJob(copyJob.id)
         props.setSelectedPage('new')
     }
@@ -84,8 +101,7 @@ function CopyJobViewPage(props: CopyJobViewProps) {
                     Delete
                 </ActionButton>
             </ActionButtonPanel>
-            <div className="flex justify-end gap-3">
-            </div>
+            <div className="flex justify-end gap-3"></div>
         </div>
     )
 }

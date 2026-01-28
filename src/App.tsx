@@ -16,8 +16,9 @@ function App() {
         invoke<boolean>('is_robocopy_available').then((is_available) => {
             if (!is_available) {
                 message(
-                    "Robocopy is not available on this system. You won't be able to run any Copy Jobs.",
+                    "Robocopy is not available on this system. You won't be able to run any copy jobs.",
                     {
+                        title: 'Robocopy not available',
                         kind: 'error',
                     }
                 ).catch(console.error)
