@@ -28,7 +28,7 @@ function App() {
     return (
         <CopyJobProvider>
             <CopyJobExecutionProvider>
-                <div className="flex h-screen bg-neutral-100 overflow-clip">
+                <div className="flex h-screen bg-neutral-100 overflow-hidden">
                     <Sidebar
                         selectedPage={selectedPage}
                         setSelectedPage={setSelectedPage}

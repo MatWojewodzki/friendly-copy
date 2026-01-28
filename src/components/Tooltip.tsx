@@ -4,6 +4,7 @@ import classNames from 'classnames'
 export type TooltipProps = {
     text: string
     children?: React.ReactNode
+    id?: string
 }
 
 function Tooltip(props: TooltipProps) {
@@ -11,10 +12,13 @@ function Tooltip(props: TooltipProps) {
         <div className="relative group">
             {props.children}
             <div
+                id={props.id}
                 className={classNames(
-                    'absolute left-1/2 -translate-x-1/2 -top-1 -translate-y-full px-2 py-1 w-max',
+                    'absolute max-w-2xs left-1/2 -translate-x-1/2 -top-1 -translate-y-full px-2 py-1 w-max',
                     'bg-neutral-900 text-white font-sans rounded-md text-xs pointer-events-none',
-                    'opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-150 ease-in-out'
+                    'opacity-0 invisible transition-opacity duration-150 ease-in-out',
+                    'group-hover:opacity-100 group-hover:visible',
+                    'group-focus-within:opacity-100 group-focus-within:visible'
                 )}
             >
                 {props.text}

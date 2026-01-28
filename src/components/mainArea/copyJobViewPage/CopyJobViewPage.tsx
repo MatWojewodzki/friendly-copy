@@ -11,6 +11,8 @@ import classNames from 'classnames'
 import { Mode } from '../../../schemas/copyJobSchemas.ts'
 import { confirm } from '@tauri-apps/plugin-dialog'
 import ActionButtonPanel from '../actionButtonPanel/ActionButtonPanel.tsx'
+import { modeOptions } from '../CopyJobForm/ModeInput.tsx'
+import ModeInfoTooltip from '../CopyJobForm/ModeInfoTooltip.tsx'
 
 type CopyJobViewProps = {
     id: string
@@ -26,6 +28,8 @@ function CopyJobViewPage(props: CopyJobViewProps) {
     const isRunning = isCopyJobRunning(copyJob.id)
 
     const handleEdit = () => setIsEditing(true)
+
+    const modeOption = modeOptions.find((option) => option.value === copyJob.mode)!
 
     const handleRun = async () => {
         if (copyJob.mode === Mode.Mirror) {
@@ -83,13 +87,16 @@ function CopyJobViewPage(props: CopyJobViewProps) {
             </h2>
             <DirPathView path={copyJob.dstDirPath} />
             <h2 className="text-sm font-semibold mb-1">Mode</h2>
-            <p
-                className={classNames('text-sm mb-8', {
-                    'text-red-700': copyJob.mode === Mode.Mirror,
-                })}
-            >
-                {copyJob.mode === 0 ? 'Copy' : 'Mirror'}
-            </p>
+            <div className="flex items-center gap-2 mb-8">
+                <p
+                    className={classNames('text-sm', {
+                        'text-red-700': modeOption.value === Mode.Mirror,
+                    })}
+                >
+                    {modeOption.label}
+                </p>
+                <ModeInfoTooltip modeName={modeOption.modeName} description={modeOption.description} />
+            </div>
             <ActionButtonPanel>
                 <ActionButton type="button" onClick={handleEdit}>
                     Edit
