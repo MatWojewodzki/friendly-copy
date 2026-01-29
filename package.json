@@ -1,5 +1,9 @@
 {
     "name": "friendly-copy",
+    "description": "A user-friendly Windows app that lets you save copy jobs and run them with one click using robocopy.",
+    "author": "Mateusz Wojewódzki matwojewodzki@gmail.com",
+    "license": "MIT",
+    "repository": "https://github.com/MatWojewodzki/friendly-copy",
     "private": true,
     "version": "0.1.0",
     "type": "module",

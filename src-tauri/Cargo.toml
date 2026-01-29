@@ -1,9 +1,11 @@
 [package]
 name = "friendly-copy"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "A user-friendly Windows app that lets you save copy jobs and run them with one click using robocopy."
+authors = ["Mateusz Wojewódzki matwojewodzki@gmail.com"]
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/MatWojewodzki/friendly-copy"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
