@@ -25,6 +25,8 @@ pub fn run_command(source: &str, destination: &str, mode: i32) -> io::Result<Sha
         .arg(source)
         .arg(destination)
         .args(flags)
+        .arg("/R:2")
+        .arg("/W:5")
         .stdout(Stdio::null())
         .stderr(Stdio::null());
     SharedChild::spawn(&mut command)
