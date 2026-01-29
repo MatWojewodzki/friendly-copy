@@ -1,14 +1,14 @@
-# friendly-copy
+# Friendly Copy
 
-# TODO list before MVP
+A user-friendly Windows app for managing repeatable copy jobs.
+Save a copy job once, then run it again with a single click using Windows’ built-in robocopy tool.
+It’s designed to make reliable file copying simple without the need to use the command line.
 
-- React:
-    - define color scheme in tailwind
-    - layout:
-        - sidebar collapsing
-    - main area:
-        - job display
-        - job form:
-            - check for input emptiness only on form submit
-- Rust:
-    - command builder and backend runner
+## Contributing
+
+**Found a bug or have an idea?** [Open an issue](https://github.com/MatWojewodzki/friendly-copy/issues/new)
+with the details.
+
+## License
+
+[MIT](LICENSE)
