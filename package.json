@@ -5,7 +5,7 @@
     "license": "MIT",
     "repository": "https://github.com/MatWojewodzki/friendly-copy",
     "private": true,
-    "version": "0.1.0",
+    "version": "0.1.1",
     "type": "module",
     "scripts": {
         "dev": "vite",

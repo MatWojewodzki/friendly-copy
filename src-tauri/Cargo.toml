@@ -1,6 +1,6 @@
 [package]
 name = "friendly-copy"
-version = "0.1.0"
+version = "0.1.1"
 description = "A user-friendly Windows app that lets you save copy jobs and run them with one click using robocopy."
 authors = ["Mateusz Wojewódzki matwojewodzki@gmail.com"]
 edition = "2021"
