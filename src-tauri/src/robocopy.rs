@@ -3,12 +3,15 @@ use std::collections::HashMap;
 use std::process::{Command, Stdio};
 use std::sync::{Arc, Mutex};
 use std::{io, thread};
+use std::os::windows::process::CommandExt;
 use tauri::{AppHandle, Emitter, State};
 
 #[derive(Default)]
 pub struct RobocopyState {
     running_copy_jobs: HashMap<String, Arc<SharedChild>>,
 }
+
+const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 pub fn is_available() -> bool {
     Command::new("robocopy").arg("/?").output().is_ok()
@@ -28,7 +31,8 @@ pub fn run_command(source: &str, destination: &str, mode: i32) -> io::Result<Sha
         .arg("/R:2")
         .arg("/W:5")
         .stdout(Stdio::null())
-        .stderr(Stdio::null());
+        .stderr(Stdio::null())
+        .creation_flags(CREATE_NO_WINDOW);
     SharedChild::spawn(&mut command)
 }
 
