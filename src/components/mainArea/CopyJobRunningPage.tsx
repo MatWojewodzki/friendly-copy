@@ -18,7 +18,7 @@ function CopyJobRunningPage(props: CopyJobRunningPageProps) {
             <MainAreaHeader>{`Job: ${props.title}`}</MainAreaHeader>
             <div className="flex justify-center items-center gap-6">
                 <span>
-                    This Copy Job is currently{' '}
+                    This copy job is currently{' '}
                     <span className="text-green-700">running</span>.
                 </span>
                 <ActionButton type="button" onClick={handleStop}>
