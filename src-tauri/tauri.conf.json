@@ -23,6 +23,8 @@
   },
   "bundle": {
     "active": true,
+    "publisher": "Mateusz Wojewódzki",
+    "licenseFile": "../LICENSE",
     "targets": "all",
     "icon": [
       "icons/32x32.png",
